@@ -3,7 +3,7 @@ import './style.css'
 class SpotifyFestivalAnalyzer {
   constructor() {
       this.clientId = '5a52712ea3974706921eee1534e53f7a'; // ¡IMPORTANTE! Reemplaza con tu Client ID real de Spotify
-      this.redirectUri = window.location.origin;
+      this.redirectUri = "https://lean-af.vercel.app/n";
       this.scopes = 'user-top-read user-read-private user-read-email'; // Añadidos scopes necesarios
       this.accessToken = null;
       this.topArtists = [];
