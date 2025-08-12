@@ -2,14 +2,13 @@ import './style.css'
 
 class SpotifyFestivalAnalyzer {
   constructor() {
-      this.clientId = '5a52712ea3974706921eee1534e53f7a'; // ¡IMPORTANTE! Reemplaza con tu Client ID real de Spotify
+      this.clientId = '5a52712ea3974706921eee1534e53f7a'; 
       this.redirectUri = 'https://lean-af.vercel.app/';
-      this.scopes = 'user-top-read user-read-private user-read-email'; // Añadidos scopes necesarios
+      this.scopes = 'user-top-read user-read-private user-read-email'; // Añadidos scopes 
       this.accessToken = null;
       this.topArtists = [];
       
       this.init();
-      this.initThemeToggle();
   }
   generateRandomString(length) {
       let text = "";
@@ -450,35 +449,6 @@ class SpotifyFestivalAnalyzer {
           `;
           container.appendChild(artistDiv);
       });
-  }
-
-  initThemeToggle() {
-      const themeToggle = document.getElementById('theme-toggle');
-      const icon = themeToggle.querySelector('.icon');
-      
-      // Cargar tema guardado o usar tema claro por defecto
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      this.updateThemeIcon(icon, savedTheme);
-      
-      themeToggle.addEventListener('click', () => {
-          const currentTheme = document.documentElement.getAttribute('data-theme');
-          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-          
-          document.documentElement.setAttribute('data-theme', newTheme);
-          localStorage.setItem('theme', newTheme);
-          this.updateThemeIcon(icon, newTheme);
-      });
-  }
-
-  updateThemeIcon(icon, theme) {
-      if (theme === 'dark') {
-          icon.textContent = '☀️';
-          icon.title = 'Cambiar a modo claro';
-      } else {
-          icon.textContent = '🌙';
-          icon.title = 'Cambiar a modo oscuro';
-      }
   }
 }
 
