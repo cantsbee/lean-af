@@ -1,0 +1,105 @@
+<!-- <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festiby - Tu festival perfecto con Spotify</title>
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-logo">
+                <span class="logo-icon">🎪</span>
+                <h1 class="logo-text">Festiby</h1>
+            </div>
+            <p class="hero-subtitle">Tu festival. Tu música. Tu experiencia perfecta.</p>
+            <p class="hero-description">
+                Conecta con Spotify y descubre qué artistas del lineup de cualquier festival 
+                son perfectos para ti. Basado en tus gustos reales.
+            </p>
+            <div class="hero-features">
+                <div class="feature">
+                    <span class="feature-icon">🎧</span>
+                    <span>Análisis de Spotify</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎯</span>
+                    <span>Recomendaciones personalizadas</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎪</span>
+                    <span>Cualquier festival</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div id="login-section" style="text-align: center;">
+                <h2>🎧 Conecta con Spotify</h2>
+                <p style="margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">Autoriza Festiby para analizar tus artistas favoritos y descubrir tu festival perfecto</p>
+                <button id="login-btn" class="btn">
+                    🎧 Conectar con Spotify
+                </button>
+            </div>
+
+            <div id="main-section" class="hidden">
+                <h2>Tus Top Artistas</h2>
+                <div id="status" class="status hidden"></div>
+                <div id="top-artists" class="top-artists"></div>
+
+                <hr style="margin: 2rem 0; border: none; height: 1px; background: #eee;">
+
+                <h2>Lineup del Festival</h2>
+                <div class="input-group">
+                    <label for="lineup-input">Pega aquí el lineup del festival (un artista por línea):</label>
+                    <textarea 
+                        id="lineup-input" 
+                        placeholder="Ejemplo:
+Arctic Monkeys
+The Strokes
+Tame Impala
+Billie Eilish
+Bad Bunny
+Rosalía
+C. Tangana
+Dua Lipa"></textarea>
+                    <div class="example-text">
+                        Puedes copiar el lineup directamente desde la web del festival
+                    </div>
+                </div>
+
+                <button id="analyze-btn" class="btn">
+                    🔍 Analizar Compatibilidad
+                </button>
+
+                <div id="recommendations" class="recommendations hidden">
+                    <h2>🎯 Artistas Recomendados para Ti</h2>
+                    <div id="recommendations-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+</body>
+</html>
