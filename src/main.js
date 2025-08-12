@@ -177,6 +177,24 @@ class SpotifyFestivalAnalyzer {
   }
 
   async analyzeFestivalLineup() {
+      console.log("Iniciando análisis de lineup...");
+      
+      // Verificar si tenemos token de acceso
+      if (!this.accessToken) {
+          this.showStatus("No tienes acceso a Spotify. Por favor, conéctate primero.", "error");
+          return;
+      }
+
+      // Verificar si tenemos artistas favoritos
+      if (!this.topArtists || this.topArtists.length === 0) {
+          this.showStatus("No se han cargado tus artistas favoritos. Intentando cargarlos...", "loading");
+          await this.fetchTopArtists();
+          if (!this.topArtists || this.topArtists.length === 0) {
+              this.showStatus("No se pudieron cargar tus artistas favoritos.", "error");
+              return;
+          }
+      }
+
       const lineupText = document.getElementById("lineup-input").value.trim();
       
       if (!lineupText) {
@@ -193,11 +211,18 @@ class SpotifyFestivalAnalyzer {
           return;
       }
 
+      console.log(`Analizando ${lineupArtists.length} artistas:`, lineupArtists);
       this.showStatus(`Analizando ${lineupArtists.length} artistas del lineup...`, "loading");
 
-      const recommendations = await this.calculateRecommendations(lineupArtists);
-      this.displayRecommendations(recommendations);
-      this.hideStatus();
+      try {
+          const recommendations = await this.calculateRecommendations(lineupArtists);
+          console.log("Recomendaciones calculadas:", recommendations);
+          this.displayRecommendations(recommendations);
+          this.hideStatus();
+      } catch (error) {
+          console.error("Error durante el análisis:", error);
+          this.showStatus(`Error durante el análisis: ${error.message}`, "error");
+      }
   }
 
   async calculateRecommendations(lineupArtists) {
@@ -363,6 +388,7 @@ class SpotifyFestivalAnalyzer {
           statusElement.textContent = message;
           statusElement.className = `status ${type}`;
           statusElement.classList.remove("hidden");
+          console.log(`Status [${type}]: ${message}`);
       }
   }
 
