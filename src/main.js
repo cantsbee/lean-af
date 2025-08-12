@@ -42,10 +42,19 @@ class SpotifyFestivalAnalyzer {
       const code = urlParams.get("code");
       const storedVerifier = localStorage.getItem("code_verifier");
 
+      // Siempre configurar los event listeners
+      this.setupEventListeners();
+
       if (code && storedVerifier) {
           await this.exchangeCodeForToken(code, storedVerifier);
       } else {
-          this.setupEventListeners();
+          // Verificar si hay un token guardado
+          const storedToken = localStorage.getItem("access_token");
+          if (storedToken) {
+              this.accessToken = storedToken;
+              this.showMainSection();
+              await this.fetchTopArtists();
+          }
       }
   }
   async loginToSpotify() {
@@ -369,14 +378,20 @@ class SpotifyFestivalAnalyzer {
       const loginBtn = document.getElementById("login-btn");
       const analyzeBtn = document.getElementById("analyze-btn");
 
+      console.log("Configurando event listeners...");
+      console.log("Login button:", loginBtn);
+      console.log("Analyze button:", analyzeBtn);
+
       if (loginBtn) {
           loginBtn.addEventListener("click", () => {
+              console.log("Login button clicked");
               this.loginToSpotify();
           });
       }
 
       if (analyzeBtn) {
           analyzeBtn.addEventListener("click", () => {
+              console.log("Analyze button clicked");
               this.analyzeFestivalLineup();
           });
       }
@@ -405,6 +420,9 @@ class SpotifyFestivalAnalyzer {
       
       if (loginSection) loginSection.classList.add("hidden");
       if (mainSection) mainSection.classList.remove("hidden");
+      
+      // Asegurar que los event listeners estén configurados
+      this.setupEventListeners();
   }
 
   displayTopArtists() {
