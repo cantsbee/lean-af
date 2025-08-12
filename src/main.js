@@ -339,6 +339,73 @@ class SpotifyFestivalAnalyzer {
 
       section.classList.remove("hidden");
   }
+
+  setupEventListeners() {
+      const loginBtn = document.getElementById("login-btn");
+      const analyzeBtn = document.getElementById("analyze-btn");
+
+      if (loginBtn) {
+          loginBtn.addEventListener("click", () => {
+              this.loginToSpotify();
+          });
+      }
+
+      if (analyzeBtn) {
+          analyzeBtn.addEventListener("click", () => {
+              this.analyzeFestivalLineup();
+          });
+      }
+  }
+
+  showStatus(message, type = "info") {
+      const statusElement = document.getElementById("status");
+      if (statusElement) {
+          statusElement.textContent = message;
+          statusElement.className = `status ${type}`;
+          statusElement.classList.remove("hidden");
+      }
+  }
+
+  hideStatus() {
+      const statusElement = document.getElementById("status");
+      if (statusElement) {
+          statusElement.classList.add("hidden");
+      }
+  }
+
+  showMainSection() {
+      const loginSection = document.getElementById("login-section");
+      const mainSection = document.getElementById("main-section");
+      
+      if (loginSection) loginSection.classList.add("hidden");
+      if (mainSection) mainSection.classList.remove("hidden");
+  }
+
+  displayTopArtists() {
+      const container = document.getElementById("top-artists");
+      if (!container) return;
+
+      container.innerHTML = "";
+      
+      this.topArtists.forEach((artist, index) => {
+          const artistDiv = document.createElement("div");
+          artistDiv.className = "artist-item";
+          artistDiv.innerHTML = `
+              <div class="artist-rank">${index + 1}</div>
+              <div class="artist-info">
+                  <div class="artist-name">${artist.name}</div>
+                  <div class="artist-genres">${artist.genres.slice(0, 3).join(", ")}</div>
+              </div>
+              <div class="artist-popularity">
+                  <div class="popularity-bar">
+                      <div class="popularity-fill" style="width: ${artist.popularity}%"></div>
+                  </div>
+                  <span class="popularity-text">${artist.popularity}%</span>
+              </div>
+          `;
+          container.appendChild(artistDiv);
+      });
+  }
 }
 
 // Inicializar la aplicación
